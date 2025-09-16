@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Educator-First GPT Studio | Professional Teaching Tools</title>
+<meta name="description" content="Comprehensive directory of educator-focused GPT tools designed to streamline course design, enhance student engagement, and reduce instructor workload. Filter by workflow phase and discover AI assistants built specifically for higher education."/>
+<style>
+  :root{
+    --bg: #0a0f1c; 
+    --bg-2: #0e1829; 
+    --card: rgba(255,255,255,0.08); 
+    --border: rgba(255,255,255,0.12);
+    --text: #f0f4ff; 
+    --muted: #a8b5d4; 
+    --accent: #4a9eff; 
+    --accent-2: #7c5cff; 
+    --success: #22c55e; 
+    --warning: #f59e0b;
+    --shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+    --shadow-hover: 0 25px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+    --radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @media (prefers-color-scheme: light){
+    :root{ 
+      --bg: #fafbff; 
+      --bg-2: #f1f5ff; 
+      --card: rgba(255,255,255,0.95); 
+      --border: #e1e8f7; 
+      --text: #0f172a; 
+      --muted: #475569; 
+      --accent: #2563eb; 
+      --accent-2: #7c3aed; 
+      --success: #16a34a;
+      --warning: #d97706;
+      --shadow: 0 20px 40px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+      --shadow-hover: 0 25px 50px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255,255,255,1);
+    }
+  }
+  
+  * { box-sizing: border-box; }
+  
+  html, body { height: 100%; }
+  
+  body {
+    margin: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    line-height: 1.6;
+    color: var(--text); 
+    background: var(--bg);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced animated background */
+  .fx {
+    position: fixed; 
+    inset: 0; 
+    z-index: -2; 
+    pointer-events: none; 
+    background:
+      radial-gradient(1400px 900px at 15% -5%, rgba(74, 158, 255, 0.15) 0%, transparent 65%),
+      radial-gradient(1100px 700px at 110% 20%, rgba(124, 92, 255, 0.12) 0%, transparent 60%),
+      radial-gradient(800px 600px at 50% 100%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+      conic-gradient(from 180deg at 50% -30%, rgba(74,158,255,.08), rgba(124,92,255,.08), rgba(74,158,255,.08));
+    filter: saturate(120%) blur(1px);
+    animation: drift 25s ease-in-out infinite alternate;
+  }
+  
+  @keyframes drift {
+    0% { transform: translateY(0) scale(1) rotate(0deg); }
+    50% { transform: translateY(-1%) scale(1.01) rotate(0.5deg); }
+    100% { transform: translateY(-2%) scale(1.02) rotate(-0.5deg); }
+  }
+
+  /* Typography improvements */
+  .wrap {
+    max-width: 1300px; 
+    margin: 0 auto; 
+    padding: 32px clamp(20px, 5vw, 48px) 120px; 
+    position: relative;
+  }
+
+  .title {
+    font-size: clamp(32px, 4vw, 52px); 
+    line-height: 1.1; 
+    font-weight: 900; 
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent;
+    filter: drop-shadow(0 8px 24px rgba(74,158,255,0.3)); 
+    margin: 16px 0 8px;
+  }
+  
+  .tagline {
+    color: var(--muted); 
+    font-size: clamp(16px, 1.4vw, 20px); 
+    font-weight: 500;
+    max-width: 600px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 12px;
+  }
+
+  .divider {
+    height: 1px; 
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); 
+    margin: 28px 0 32px;
+  }
+
+  /* Enhanced controls */
+  .controls {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 12px; 
+    align-items: center; 
+    margin: 20px 0 12px;
+  }
+  
+  .pill-label {
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    border: 1px solid var(--border); 
+    color: var(--muted);
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); 
+    padding: 12px 16px; 
+    border-radius: 999px; 
+    cursor: pointer; 
+    user-select: none; 
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .pill-label:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  input[type="radio"].hide {
+    position: absolute; 
+    left: -9999px;
+  }
+  
+  input[type="radio"].hide:checked + .pill-label {
+    color: #0a0f1c; 
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); 
+    border-color: transparent;
+    font-weight: 600;
+    transform: translateY(-1px);
+  }
+
+  .fieldset {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+    align-items: center;
+  }
+  
+  .legend {
+    font-weight: 700; 
+    color: var(--text); 
+    margin-right: 8px; 
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Enhanced grid and cards */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+  }
+  
+  .card {
+    border-radius: var(--radius); 
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); 
+    box-shadow: var(--shadow);
+    transition: var(--transition); 
+    position: relative; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .card::after {
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    background: radial-gradient(600px 200px at 50% -10%, rgba(74,158,255,.12), transparent 40%); 
+    pointer-events: none;
+    opacity: 0;
+    transition: var(--transition);
+  }
+  
+  .card:hover::after {
+    opacity: 1;
+  }
+  
+  .pad {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .badge {
+    display: inline-flex; 
+    gap: 8px; 
+    align-items: center; 
+    background: rgba(0,0,0,0.3); 
+    padding: 8px 14px; 
+    border-radius: 999px; 
+    border: 1px solid var(--border); 
+    font-size: 12px; 
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+  
+  .badge .dot {
+    width: 8px; 
+    height: 8px; 
+    border-radius: 999px; 
+    background: var(--accent);
+  }
+  
+  .h3 {
+    font-weight: 800; 
+    font-size: 20px; 
+    margin: 0 0 12px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  
+  .desc {
+    color: var(--muted); 
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  
+  .wins {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; 
+    margin: 16px 0;
+  }
+  
+  .win {
+    font-size: 12px; 
+    color: #0a0f1c; 
+    background: linear-gradient(135deg, var(--success), #22c55e); 
+    padding: 6px 12px; 
+    border-radius: 999px; 
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  details {
+    margin: 12px 0;
+  }
+  
+  summary {
+    cursor: pointer; 
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 0;
+    transition: var(--transition);
+  }
+  
+  summary:hover {
+    color: var(--accent-2);
+  }
+  
+  .small {
+    font-size: 13px; 
+    color: var(--muted);
+  }
+  
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+    transition: var(--transition);
+  }
+  
+  .cta-link:hover {
+    color: var(--accent-2);
+    gap: 12px;
+  }
+  
+  .footer {
+    margin-top: 48px; 
+    color: var(--muted); 
+    font-size: 14px;
+    text-align: center;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Enhanced phase-specific colors */
+  .card[data-phase="Plan & Align"] .badge { background: rgba(74, 158, 255, 0.2); }
+  .card[data-phase="Make it Interactive"] .badge { background: rgba(124, 92, 255, 0.2); }
+  .card[data-phase="Add Media"] .badge { background: rgba(245, 158, 11, 0.2); }
+  .card[data-phase="Assure Quality & Presence"] .badge { background: rgba(34, 197, 94, 0.2); }
+  .card[data-phase="Data & Ops"] .badge { background: rgba(239, 68, 68, 0.2); }
+  .card[data-phase="Anytime Helpers"] .badge { background: rgba(168, 85, 247, 0.2); }
+
+  /* Sorting and filtering (same logic as original) */
+  .card[data-id="syllabus-genie"] { order: 1; }
+  .card[data-id="content-generator"] { order: 2; }
+  .card[data-id="math-air"] { order: 3; }
+  .card[data-id="math-latexify"] { order: 4; }
+  .card[data-id="interactive-activity"] { order: 5; }
+  .card[data-id="code-canvas"] { order: 6; }
+  .card[data-id="image-prompt"] { order: 7; }
+  .card[data-id="manim-animator"] { order: 8; }
+  .card[data-id="storyframe-educator"] { order: 9; }
+  .card[data-id="course-whisperer"] { order: 10; }
+  .card[data-id="excel-sidekick"] { order: 11; }
+  .card[data-id="best-prompt-maker"] { order: 12; }
+  .card[data-id="meta-gpt"] { order: 13; }
+
+  #sort-az:checked ~ .grid .card[data-id="math-air"] { order: 1; }
+  #sort-az:checked ~ .grid .card[data-id="best-prompt-maker"] { order: 2; }
+  #sort-az:checked ~ .grid .card[data-id="code-canvas"] { order: 3; }
+  #sort-az:checked ~ .grid .card[data-id="content-generator"] { order: 4; }
+  #sort-az:checked ~ .grid .card[data-id="course-whisperer"] { order: 5; }
+  #sort-az:checked ~ .grid .card[data-id="excel-sidekick"] { order: 6; }
+  #sort-az:checked ~ .grid .card[data-id="image-prompt"] { order: 7; }
+  #sort-az:checked ~ .grid .card[data-id="interactive-activity"] { order: 8; }
+  #sort-az:checked ~ .grid .card[data-id="manim-animator"] { order: 9; }
+  #sort-az:checked ~ .grid .card[data-id="math-latexify"] { order: 10; }
+  #sort-az:checked ~ .grid .card[data-id="meta-gpt"] { order: 11; }
+  #sort-az:checked ~ .grid .card[data-id="storyframe-educator"] { order: 12; }
+  #sort-az:checked ~ .grid .card[data-id="syllabus-genie"] { order: 13; }
+
+  #phase-plan:checked ~ .grid .card:not([data-phase="Plan & Align"]) { display: none; }
+  #phase-interactive:checked ~ .grid .card:not([data-phase="Make it Interactive"]) { display: none; }
+  #phase-media:checked ~ .grid .card:not([data-phase="Add Media"]) { display: none; }
+  #phase-quality:checked ~ .grid .card:not([data-phase="Assure Quality & Presence"]) { display: none; }
+  #phase-ops:checked ~ .grid .card:not([data-phase="Data & Ops"]) { display: none; }
+  #phase-anytime:checked ~ .grid .card:not([data-phase="Anytime Helpers"]) { display: none; }
+
+  /* Enhanced accessibility */
+  .visually-hidden {
+    position: absolute !important; 
+    height: 1px; 
+    width: 1px; 
+    overflow: hidden; 
+    clip: rect(1px,1px,1px,1px); 
+    white-space: nowrap;
+  }
+
+  /* Focus states */
+  .pill-label:focus-within,
+  .cta-link:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Responsive improvements */
+  @media (max-width: 768px) {
+    .wrap { padding: 24px 16px 80px; }
+    .grid { grid-template-columns: 1fr; gap: 20px; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .fieldset { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="fx" aria-hidden="true"></div>
+<a class="visually-hidden" href="#content">Skip to content</a>
+
+<main class="wrap" id="content">
+  <header>
+    <h1 class="title">Educator-First GPT Studio</h1>
+    <p class="tagline">Streamline course design, enhance engagement, and reclaim your time with AI assistants built specifically for higher education.</p>
+    <p class="subtitle">Professional tools designed by educators, for educators. No technical expertise required.</p>
+  </header>
+
+  <nav class="controls fieldset" role="group" aria-label="Sorting options">
+    <span class="legend">Sort:</span>
+    <input class="hide" type="radio" name="sort" id="sort-flow" checked>
+    <label class="pill-label" for="sort-flow">Workflow Order</label>
+    <input class="hide" type="radio" name="sort" id="sort-az">
+    <label class="pill-label" for="sort-az">Alphabetical</label>
+  </nav>
+
+  <nav class="controls fieldset" role="group" aria-label="Filter by workflow phase">
+    <span class="legend">Phase:</span>
+    <input class="hide" type="radio" name="phase" id="phase-all" checked>
+    <label class="pill-label" for="phase-all">All Tools</label>
+    <input class="hide" type="radio" name="phase" id="phase-plan">
+    <label class="pill-label" for="phase-plan">Plan & Align</label>
+    <input class="hide" type="radio" name="phase" id="phase-interactive">
+    <label class="pill-label" for="phase-interactive">Make Interactive</label>
+    <input class="hide" type="radio" name="phase" id="phase-media">
+    <label class="pill-label" for="phase-media">Add Media</label>
+    <input class="hide" type="radio" name="phase" id="phase-quality">
+    <label class="pill-label" for="phase-quality">Assure Quality</label>
+    <input class="hide" type="radio" name="phase" id="phase-ops">
+    <label class="pill-label" for="phase-ops">Data & Operations</label>
+    <input class="hide" type="radio" name="phase" id="phase-anytime">
+    <label class="pill-label" for="phase-anytime">Universal Helpers</label>
+  </nav>
+
+  <div class="divider" role="separator" aria-hidden="true"></div>
+
+  <section class="grid" aria-live="polite" aria-label="GPT Tools Directory">
+    
+    <article class="card" data-id="syllabus-genie" data-phase="Plan & Align">
+      <div class="pad">
+        <span class="badge"><span class="dot" aria-hidden="true"></span>Plan & Align</span>
+        <h3 class="h3">Syllabus Genie</h3>
+        <p class="desc">Transform existing syllabi into QM-aligned, accessibility-compliant documents that maintain your authentic teaching voice while meeting institutional standards.</p>
+        <div class="wins">
+          <span class="win">QM Compliance</span>
+          <span class="win">WCAG Standards</span>
+          <span class="win">Voice Preservation</span>
+          <span class="win">Online Optimization</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Reduces syllabus revision time by 75%</li>
+            <li>Ensures institutional compliance standards</li>
+            <li>Maintains personal teaching philosophy</li>
+            <li>Generates accessibility-ready formats</li>
+          </ul>
+        </details>
+        <a href="https://example.com/syllabus-genie" class="cta-link" target="_blank" rel="noopener">
+          Access Syllabus Genie <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="content-generator" data-phase="Plan & Align">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Plan & Align</span>
+        <h3 class="h3">Course Content Generator</h3>
+        <p class="desc">Generate complete assessment frameworks, learning activities, and rubrics aligned to competency-based and inclusive pedagogy principles.</p>
+        <div class="wins">
+          <span class="win">CBE Alignment</span>
+          <span class="win">UDL Integration</span>
+          <span class="win">Scaffold Support</span>
+          <span class="win">Time Efficiency</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Ensures 80%+ learning objective alignment</li>
+            <li>Incorporates UDL principles automatically</li>
+            <li>Provides instructor implementation notes</li>
+            <li>Creates differentiated assessment options</li>
+          </ul>
+        </details>
+        <a href="https://example.com/course-content-generator" class="cta-link" target="_blank" rel="noopener">
+          Access Content Generator <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="math-air" data-phase="Plan & Align">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Plan & Align</span>
+        <h3 class="h3">AI-Resistant Math Content Creator</h3>
+        <p class="desc">Design mathematically rigorous assessments that promote authentic reasoning while minimizing AI assistance opportunities through strategic problem design.</p>
+        <div class="wins">
+          <span class="win">Academic Integrity</span>
+          <span class="win">Authentic Assessment</span>
+          <span class="win">Multi-Modal Responses</span>
+          <span class="win">Proctoring Ready</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Reduces academic dishonesty incidents</li>
+            <li>Promotes conceptual understanding</li>
+            <li>Supports video/audio response formats</li>
+            <li>Compatible with online proctoring systems</li>
+          </ul>
+        </details>
+        <a href="https://example.com/ai-resistant-math" class="cta-link" target="_blank" rel="noopener">
+          Access Math Content Creator <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="math-latexify" data-phase="Plan & Align">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Plan & Align</span>
+        <h3 class="h3">MathLaTeXify</h3>
+        <p class="desc">Convert mathematical concepts into professionally typeset LaTeX/MathJax code for seamless integration with Canvas, slides, and digital materials.</p>
+        <div class="wins">
+          <span class="win">Professional Typesetting</span>
+          <span class="win">Cross-Platform</span>
+          <span class="win">Complex Notation</span>
+          <span class="win">Time Saving</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Eliminates equation formatting struggles</li>
+            <li>Supports advanced mathematical notation</li>
+            <li>Works across LMS and presentation platforms</li>
+            <li>Generates publication-ready mathematics</li>
+          </ul>
+        </details>
+        <a href="https://example.com/mathlatexify" class="cta-link" target="_blank" rel="noopener">
+          Access MathLaTeXify <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="interactive-activity" data-phase="Make it Interactive">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Make it Interactive</span>
+        <h3 class="h3">Interactive Activity Generator</h3>
+        <p class="desc">Create self-contained HTML learning tools including flashcards, practice exercises, and calculators that enhance student engagement across devices.</p>
+        <div class="wins">
+          <span class="win">Mobile Optimized</span>
+          <span class="win">No Dependencies</span>
+          <span class="win">Reusable Templates</span>
+          <span class="win">Instant Feedback</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Increases student engagement metrics</li>
+            <li>Works without internet connectivity</li>
+            <li>Adaptable across subject areas</li>
+            <li>Provides immediate learning feedback</li>
+          </ul>
+        </details>
+        <a href="https://example.com/interactive-activity-generator" class="cta-link" target="_blank" rel="noopener">
+          Access Activity Generator <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="code-canvas" data-phase="Make it Interactive">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Make it Interactive</span>
+        <h3 class="h3">Code Canvas Rich Content Editor</h3>
+        <p class="desc">Build sophisticated Canvas course pages with advanced layouts, interactive elements, and accessibility features using Canvas-approved HTML/CSS.</p>
+        <div class="wins">
+          <span class="win">Canvas Compliance</span>
+          <span class="win">WCAG Accessible</span>
+          <span class="win">Professional Layout</span>
+          <span class="win">No JavaScript</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Enhances course visual appeal</li>
+            <li>Meets accessibility standards</li>
+            <li>Improves information organization</li>
+            <li>Reduces support tickets</li>
+          </ul>
+        </details>
+        <a href="https://example.com/code-canvas-editor" class="cta-link" target="_blank" rel="noopener">
+          Access Canvas Editor <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="image-prompt" data-phase="Add Media">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Add Media</span>
+        <h3 class="h3">Image Prompt Generator</h3>
+        <p class="desc">Generate consistent, professional visual assets for courses, presentations, and educational materials with optimized AI prompts.</p>
+        <div class="wins">
+          <span class="win">Brand Consistency</span>
+          <span class="win">Time Efficient</span>
+          <span class="win">Professional Quality</span>
+          <span class="win">Multi-Purpose</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Maintains visual consistency across materials</li>
+            <li>Reduces graphic design time by 80%</li>
+            <li>Creates engaging presentation visuals</li>
+            <li>Supports diverse educational contexts</li>
+          </ul>
+        </details>
+        <a href="https://example.com/image-prompt-gpt" class="cta-link" target="_blank" rel="noopener">
+          Access Image Generator <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="manim-animator" data-phase="Add Media">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Add Media</span>
+        <h3 class="h3">Manim Code Animator</h3>
+        <p class="desc">Create professional mathematical and scientific animations for lectures using production-ready ManimCE code with educational best practices.</p>
+        <div class="wins">
+          <span class="win">Lecture Ready</span>
+          <span class="win">Clean Code</span>
+          <span class="win">3D Capabilities</span>
+          <span class="win">Educational Focus</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Enhances complex concept visualization</li>
+            <li>Improves student comprehension rates</li>
+            <li>Creates reusable animation libraries</li>
+            <li>Supports advanced mathematical topics</li>
+          </ul>
+        </details>
+        <a href="https://example.com/manim-code-animator" class="cta-link" target="_blank" rel="noopener">
+          Access Manim Animator <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="storyframe-educator" data-phase="Add Media">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Add Media</span>
+        <h3 class="h3">Storyframe Educator</h3>
+        <p class="desc">Craft cinematic educational videos with professional-grade prompts for AI video platforms, featuring detailed shot planning and educational narrative structure.</p>
+        <div class="wins">
+          <span class="win">Cinematic Quality</span>
+          <span class="win">Educational Narrative</span>
+          <span class="win">Platform Ready</span>
+          <span class="win">Visual Continuity</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Creates engaging video content</li>
+            <li>Supports multiple AI video platforms</li>
+            <li>Maintains narrative consistency</li>
+            <li>Reduces video production complexity</li>
+          </ul>
+        </details>
+        <a href="https://example.com/storyframe-educator" class="cta-link" target="_blank" rel="noopener">
+          Access Storyframe Educator <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="course-whisperer" data-phase="Assure Quality & Presence">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Assure Quality & Presence</span>
+        <h3 class="h3">Course Whisperer</h3>
+        <p class="desc">Audit and enhance instructor presence and responsiveness in online courses, with specific focus on meaningful student interaction and engagement strategies.</p>
+        <div class="wins">
+          <span class="win">Presence Analysis</span>
+          <span class="win">Engagement Boost</span>
+          <span class="win">Targeted Feedback</span>
+          <span class="win">Student Connection</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Improves course evaluation scores</li>
+            <li>Enhances student retention rates</li>
+            <li>Provides actionable improvement strategies</li>
+            <li>Strengthens instructor-student relationships</li>
+          </ul>
+        </details>
+        <a href="https://example.com/course-whisperer" class="cta-link" target="_blank" rel="noopener">
+          Access Course Whisperer <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="excel-sidekick" data-phase="Data & Ops">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Data & Operations</span>
+        <h3 class="h3">Excel AI Sidekick</h3>
+        <p class="desc">Streamline educational data management with advanced Excel automation for gradebooks, attendance tracking, and outcomes assessment reporting.</p>
+        <div class="wins">
+          <span class="win">Data Automation</span>
+          <span class="win">Error Reduction</span>
+          <span class="win">Time Recovery</span>
+          <span class="win">Report Generation</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Reduces administrative time by 60%</li>
+            <li>Eliminates calculation errors</li>
+            <li>Automates repetitive reporting tasks</li>
+            <li>Generates synthetic test datasets</li>
+          </ul>
+        </details>
+        <a href="https://example.com/excel-ai-sidekick" class="cta-link" target="_blank" rel="noopener">
+          Access Excel Sidekick <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="best-prompt-maker" data-phase="Anytime Helpers">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Universal Helpers</span>
+        <h3 class="h3">Best Prompt Maker</h3>
+        <p class="desc">Transform basic AI requests into expert-level prompts that consistently deliver high-quality, education-focused results across any platform or tool.</p>
+        <div class="wins">
+          <span class="win">Quality Consistency</span>
+          <span class="win">Reduced Iterations</span>
+          <span class="win">Expert Results</span>
+          <span class="win">Cross-Platform</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Maximizes AI tool effectiveness</li>
+            <li>Reduces prompt engineering learning curve</li>
+            <li>Creates reusable prompt templates</li>
+            <li>Improves output quality consistently</li>
+          </ul>
+        </details>
+        <a href="https://example.com/best-prompt-maker" class="cta-link" target="_blank" rel="noopener">
+          Access Prompt Maker <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-id="meta-gpt" data-phase="Anytime Helpers">
+      <div class="pad">
+        <span class="badge"><span class="dot"></span>Universal Helpers</span>
+        <h3 class="h3">Meta-GPT: Custom GPT Creator</h3>
+        <p class="desc">Design specialized GPT assistants for recurring departmental workflows, course-specific needs, or institutional processes with production-ready system prompts.</p>
+        <div class="wins">
+          <span class="win">Custom Solutions</span>
+          <span class="win">Workflow Optimization</span>
+          <span class="win">Institutional Alignment</span>
+          <span class="win">Rapid Deployment</span>
+        </div>
+        <details>
+          <summary>Professional Benefits</summary>
+          <ul class="small">
+            <li>Creates department-specific AI assistants</li>
+            <li>Maintains institutional voice and standards</li>
+            <li>Enables rapid prototype development</li>
+            <li>Scales successful workflows across teams</li>
+          </ul>
+        </details>
+        <a href="https://chatgpt.com/g/g-68957f060c408191884985d8c0c0919a-meta-gpt-the-gpt-that-creates-gpts" class="cta-link" target="_blank" rel="noopener">
+          Access Meta-GPT <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+  </section>
+
+  <footer class="footer">
+    <p><strong>Technical Note:</strong> This directory uses CSS-only filtering and sorting with no JavaScript dependencies, ensuring maximum compatibility and performance across all devices and browsers.</p>
+    <p class="small">Designed for educators, by educators. Professional tools that respect your time and expertise.</p>
+  </footer>
+</main>
+</body>
+</html>
