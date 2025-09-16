@@ -417,9 +417,7 @@
 
   <nav class="controls fieldset" role="group" aria-label="Sorting options">
     <span class="legend">Sort:</span>
-    <input class="hide" type="radio" name="sort" id="sort-flow" checked>
     <label class="pill-label" for="sort-flow">Workflow Order</label>
-    <input class="hide" type="radio" name="sort" id="sort-az">
     <label class="pill-label" for="sort-az">Alphabetical</label>
   </nav>
 
@@ -437,6 +435,8 @@
   <div class="divider" role="separator" aria-hidden="true"></div>
 
   <!-- Hidden radio buttons for CSS filtering -->
+  <input class="hide" type="radio" name="sort" id="sort-flow" checked>
+  <input class="hide" type="radio" name="sort" id="sort-az">
   <input class="hide" type="radio" name="phase" id="phase-all" checked>
   <input class="hide" type="radio" name="phase" id="phase-plan">
   <input class="hide" type="radio" name="phase" id="phase-interactive">
@@ -798,7 +798,7 @@
   </div>
 
   <footer class="footer">
-    
+    <p><strong>Technical Note:</strong> This directory uses CSS-only filtering and sorting with no JavaScript dependencies, ensuring maximum compatibility and performance across all devices and browsers.</p>
     <p class="small">Designed for educators, by educators. Professional tools that respect your time and expertise.</p>
   </footer>
 </main>
